@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Member;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Member;
 use App\Models\Task;
 
 class Project extends Model
@@ -25,19 +25,5 @@ class Project extends Model
     public function customers()
     {
         return $this->belongsTo(Customer::Class);
-    }
-
-    public function scopeTasksFinished()
-    {
-        return $this->tasks()->where('status', Member::STATUS_CLOSE)->count();
-    }
-
-    public function getProcessDataAttribute()
-    {
-        if ($this->tasksFinished() == null) {
-            return 0;
-        } else {
-            return number_format($this->tasksFinished() / count($this->tasks) * 100, 1, '.', ',');
-        }
     }
 }
