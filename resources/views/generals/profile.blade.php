@@ -168,8 +168,8 @@
                                             <div class="form-group row">
                                                 <label for="inputName2" class="col-sm-2 col-form-label">Re-Password</label>
                                                 <div class="col-sm-10">
-                                                    <input type="password" name="repassword" class="form-control @error('repassword') is-invalid @enderror" id="inputEmail" placeholder="Re-Password">
-                                                    @error('repassword')
+                                                    <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" id="inputEmail" placeholder="Re-Password">
+                                                    @error('password_confirmation')
                                                     <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>

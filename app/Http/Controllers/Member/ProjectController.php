@@ -18,7 +18,7 @@ class ProjectController extends Controller
     public function index()
     {
         $listProject = auth()->user()->projects()->paginate(config('app.pagination'));
-        return view('members.projects.projects', ['projects' => $listProject, 'id' => Member::ID]);
+        return view('members.projects.projects', ['projects' => $listProject]);
     }
 
     /**

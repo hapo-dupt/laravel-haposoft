@@ -39,9 +39,15 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($projects as $value)
+                                    @foreach($projects as $key => $value)
                                         <tr>
-                                            <td>{{ ++$id }}</td>
+                                            <td>
+                                                @if(request('page') > 1)
+                                                    {{ config('app.pagination') + 1 }}
+                                                @else
+                                                    {{ $key + 1 }}
+                                                @endif
+                                            </td>
                                             <td>{{ $value->title }}</td>
                                             <td>{{ $value->description }}</td>
                                             <td>{{ date('H:i d-m-Y', strtotime($value->begin_at)) }}</td>

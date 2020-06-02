@@ -32,34 +32,7 @@ class ProfileRequest extends FormRequest
             'address' => 'required|string|max:255',
             'image' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'password' => 'nullable|min:3|max:10',
-            'repassword' => 'nullable|min:3|max:10|same:password'
-        ];
-    }
-
-    /**
-     * Send message when invalid validation.
-     */
-    public function messages()
-    {
-        return [
-            'name.required' => 'Full name is required!',
-            'name.regex' => 'You must to enter the correct format of name!',
-            'name.max' => 'Name is only maximize 50 characters of alphabet!',
-            'email.required' => 'Email is required!',
-            'email.email' => 'Format email was not correct!',
-            'gender.required' => 'Gender is required!',
-            'phone.required' => 'Phone is required!',
-            'phone.numberic' => 'Format phone was not correct!',
-            'address.required' => 'Address is required!',
-            'address.string' => 'Format address was not correct!',
-            'address.max' => 'Address is only maximize 255 characters!',
-            'image.max' => 'Avatar image is only maximize 2048 KB',
-            'image.mimes' => 'You are only allowed to upload image (included: jpeg,png,jpg,gif,svg)',
-            'password.min' => 'Password is required minimize 3 characters!',
-            'password.max' => 'Password is required maximize 10 characters!',
-            'repassword.min' => 'Repassword is required minimize 3 characters!',
-            'repassword.max' => 'Repassword is only maximize 10 characters!',
-            'repassword.same' => 'Repassword must to be same with password!'
+            'password_confirmation' => 'confirmed'
         ];
     }
 }

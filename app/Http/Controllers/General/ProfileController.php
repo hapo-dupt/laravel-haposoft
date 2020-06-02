@@ -34,11 +34,10 @@ class ProfileController extends Controller
         if ($request->password) {
             $data['password'] = bcrypt($request->password);
         }
-        unset($data['repassword']);
         if ($request->has('image')) {
-            $storageFile = Storage::put('public/images/', $request->image);
+            $storageFile = Storage::put(config('app.storage_images'), $request->image);
             $data['image'] = basename($storageFile);
-            Storage::delete('public/images/' . auth()->user()->image);
+            Storage::delete(config('app.storage_images') . auth()->user()->image);
         }
         Member::findOrFail($request->id)->update($data);
         return redirect()->route('profiles.index')->with('success', trans('message.profile_success'));

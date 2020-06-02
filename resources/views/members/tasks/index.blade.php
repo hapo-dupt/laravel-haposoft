@@ -40,9 +40,9 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($data as $value)
+                                    @foreach($data as $key => $value)
                                         <tr>
-                                            <td>{{ ++$id }}</td>
+                                            <td>{{ $key + 1 }}</td>
                                             <td>{{ $value->title }}</td>
                                             <td>{{ date('H:i d-m-Y', strtotime($value->begin_at)) }}</td>
                                             <td>{{ date('H:i d-m-Y', strtotime($value->finish_at)) }}</td>

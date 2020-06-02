@@ -19,7 +19,7 @@ class TaskController extends Controller
     public function index()
     {
         $taskByProject = auth()->user()->projects()->paginate(config('app.pagination'));
-        return view('members.tasks.index', ['data' => $taskByProject, 'id' => Member::ID]);
+        return view('members.tasks.index', ['data' => $taskByProject]);
     }
 
     /**

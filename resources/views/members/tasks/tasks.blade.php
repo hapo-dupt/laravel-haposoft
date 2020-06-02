@@ -65,13 +65,13 @@
                                     </tr>
                                     </thead>
                                     <tbody id="table_data">
-                                    @foreach($dataTask['listTask'] as $value)
+                                    @foreach($dataTask['listTask'] as $key => $value)
                                         <tr>
                                             <td>
                                                 @if(request('page') > 1)
                                                     {{ ++$dataTask['paginate'] }}
                                                 @else
-                                                    {{ ++$dataTask['orderId'] }}
+                                                    {{ $key + 1 }}
                                                 @endif
                                             </td>
                                             <td>{{ $value->title }}</td>
