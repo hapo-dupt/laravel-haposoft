@@ -47,9 +47,9 @@ class ProjectController extends Controller
     public function showTask($projectId)
     {
         $projectTitle = Project::findorFail($projectId)->title;
-        $taskList = auth()->user()->tasks()->where('project_id', $projectId)->paginate(config('app.pagination'));
+        $tasks = auth()->user()->tasks()->where('project_id', $projectId)->paginate(config('app.pagination'));
         $dataTask = [
-            'taskList' => $taskList,
+            'taskList' => $tasks,
             'orderId' => Member::ID,
             'projectId' => $projectId,
             'paginate' => config('app.pagination'),
