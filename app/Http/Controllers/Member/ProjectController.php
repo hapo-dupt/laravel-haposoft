@@ -17,8 +17,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $listProject = auth()->user()->projects()->paginate(config('app.pagination'));
-        return view('members.projects.projects', ['projects' => $listProject, 'id' => Member::ID]);
+        $projects = auth()->user()->projects()->paginate(config('app.pagination'));
+        return view('members.projects.projects', ['projects' => $projects]);
     }
 
     /**
@@ -28,15 +28,15 @@ class ProjectController extends Controller
      */
     public function show($projectId)
     {
-        $dataProjects = Project::findorFail($projectId);
-        $process = $dataProjects->process_data;
-        $contentProject = [
+        $project = Project::findorFail($projectId);
+        $process = $project->process_data;
+        $projectContents = [
             'process' => $process,
-            'projectDetail' => $dataProjects,
-            'customer' => $dataProjects->customers,
-            'member' => $dataProjects->members
+            'project' => $project,
+            'customer' => $project->customers,
+            'member' => $project->members
         ];
-        return view('members.projects.details', $contentProject);
+        return view('members.projects.details', $projectContents);
     }
 
     /**
@@ -46,15 +46,15 @@ class ProjectController extends Controller
      */
     public function showTask($projectId)
     {
-        $titleProject = Project::findorFail($projectId)->title;
-        $listTask = auth()->user()->tasks()->where('project_id', $projectId)->paginate(config('app.pagination'));
-        $dataTask = [
-            'listTask' => $listTask,
+        $projectTitle = Project::findorFail($projectId)->title;
+        $tasks = auth()->user()->tasks()->where('project_id', $projectId)->paginate(config('app.pagination'));
+        $dataTasks = [
+            'tasks' => $tasks,
             'orderId' => Member::ID,
-            'project_id' => $projectId,
+            'projectId' => $projectId,
             'paginate' => config('app.pagination'),
-            'titleProject' => $titleProject
+            'projectTitle' => $projectTitle
         ];
-        return view('members.tasks.tasks', ['dataTask' => $dataTask]);
+        return view('members.tasks.tasks', $dataTasks);
     }
 }

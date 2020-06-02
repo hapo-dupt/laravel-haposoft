@@ -234,5 +234,6 @@ return [
      */
     'pagination' => env('PAGINATION', 5),
     'admin_pagination' => env('ADMIN_PAGINATION', 15),
+    'storage_images' => env('STORAGE_IMAGES', 'public/images/')
 
 ];

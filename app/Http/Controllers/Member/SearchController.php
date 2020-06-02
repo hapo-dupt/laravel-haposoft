@@ -16,8 +16,8 @@ class SearchController extends Controller
      */
     public function search(Request $request)
     {
-        $task = auth()->user()->tasks()->where('title', 'like', "%$request->keyword%")
+        $tasks = auth()->user()->tasks()->where('title', 'like', "%$request->keyword%")
             ->orWhere('description', 'like', "%$request->keyword%")->paginate(config('app.pagination'));
-        return view('generals.resultSearch', ['data' => $task]);
+        return view('generals.resultSearch', ['tasks' => $tasks]);
     }
 }

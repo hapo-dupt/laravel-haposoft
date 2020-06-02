@@ -5,6 +5,7 @@ namespace App\Http\Controllers\General;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileRequest;
 use App\Models\Member;
+use App\Services\ImageServices;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
@@ -13,6 +14,7 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+
     /**
      * Return to profile page view
      *
@@ -34,11 +36,8 @@ class ProfileController extends Controller
         if ($request->password) {
             $data['password'] = bcrypt($request->password);
         }
-        unset($data['repassword']);
-        if ($request->has('image')) {
-            $storageFile = Storage::put('public/images/', $request->image);
-            $data['image'] = basename($storageFile);
-            Storage::delete('public/images/' . auth()->user()->image);
+        if (!is_null($request->image)) {
+            $data['image'] = (new ImageServices)->handleUploadedImage($request->file('image'));
         }
         Member::findOrFail($request->id)->update($data);
         return redirect()->route('profiles.index')->with('success', trans('message.profile_success'));

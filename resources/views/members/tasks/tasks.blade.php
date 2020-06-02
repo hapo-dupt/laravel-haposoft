@@ -37,7 +37,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Project's Viewing: {{ $dataTask['titleProject'] }}</h3>
+                                <h3 class="card-title">Project's Viewing: {{ $projectTitle }}</h3>
                             </div>
                             <!-- /.card-header -->
                             @if(session('success'))
@@ -65,20 +65,20 @@
                                     </tr>
                                     </thead>
                                     <tbody id="table_data">
-                                    @foreach($dataTask['listTask'] as $value)
+                                    @foreach($tasks as $key => $task)
                                         <tr>
                                             <td>
                                                 @if(request('page') > 1)
-                                                    {{ ++$dataTask['paginate'] }}
+                                                    {{ ($paginate * (request('page') - 1)) + 1 }}
                                                 @else
-                                                    {{ ++$dataTask['orderId'] }}
+                                                    {{ $key + 1 }}
                                                 @endif
                                             </td>
-                                            <td>{{ $value->title }}</td>
-                                            <td>{{ date('H:i d-m-Y', strtotime($value->begin_at)) }}</td>
-                                            <td>{{ date('H:i d-m-Y', strtotime($value->finish_at)) }}</td>
+                                            <td>{{ $task->title }}</td>
+                                            <td>{{ date('H:i d-m-Y', strtotime($task->begin_at)) }}</td>
+                                            <td>{{ date('H:i d-m-Y', strtotime($task->finish_at)) }}</td>
                                             <td>
-                                                @if($value->status == \App\Models\Member::STATUS_ACTIVE)
+                                                @if($task->status == \App\Models\Member::STATUS_ACTIVE)
                                                     <p class="alert alert-success p-1 text-center">Pending</p>
                                                 @else
                                                     <p class="alert alert-danger p-1 text-center">Completed</p>
@@ -86,20 +86,20 @@
                                             </td>
                                             <td>
                                                 <a class="btn btn-primary viewTask text-white"
-                                                   data-id="{{ $value->id }}"
-                                                   data-title="{{ $value->title }}"
-                                                   data-description="{{ $value->description }}"
-                                                   data-time-begin="{{ date('H:i d-m-Y', strtotime($value->begin_at)) }}"
-                                                   data-time-finish="{{ date('H:i d-m-Y', strtotime($value->finish_at)) }}"
+                                                   data-id="{{ $task->id }}"
+                                                   data-title="{{ $task->title }}"
+                                                   data-description="{{ $task->description }}"
+                                                   data-time-begin="{{ date('H:i d-m-Y', strtotime($task->begin_at)) }}"
+                                                   data-time-finish="{{ date('H:i d-m-Y', strtotime($task->finish_at)) }}"
                                                    data-pending="{{ \App\Models\Member::STATUS_ACTIVE }}"
-                                                   data-status="{{ $value->status }}"
+                                                   data-status="{{ $task->status }}"
                                                 >
                                                     View
                                                 </a>
-                                                @if($value->status == \App\Models\Member::STATUS_ACTIVE)
+                                                @if($task->status == \App\Models\Member::STATUS_ACTIVE)
                                                     <a class="btn btn-success text-white dataClass" data-toggle="modal"
                                                        data-target="#exampleModal" data-whatever="@mdo"
-                                                       data-id="{{ $value->id }}" data-project-id="{{ $dataTask['project_id'] }}">Complete</a>
+                                                       data-id="{{ $task->id }}" data-project-id="{{ $projectId}}">Complete</a>
                                                 @else
                                                     <a class="btn btn-secondary text-white" disabled>Complete</a>
                                                 @endif
@@ -111,7 +111,7 @@
                                 <div class="text-center">
                                     <nav aria-label="Page navigation example">
                                         <ul class="pagination justify-content-center">
-                                            {{ $dataTask['listTask']->links() }}
+                                            {{ $tasks->links() }}
                                         </ul>
                                     </nav>
                                 </div>
