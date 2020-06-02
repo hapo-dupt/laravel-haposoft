@@ -37,7 +37,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Project's Viewing: {{ $dataTask['titleProject'] }}</h3>
+                                <h3 class="card-title">Project's Viewing: {{ $projectTitle }}</h3>
                             </div>
                             <!-- /.card-header -->
                             @if(session('success'))
@@ -65,11 +65,11 @@
                                     </tr>
                                     </thead>
                                     <tbody id="table_data">
-                                    @foreach($dataTask['listTask'] as $key => $value)
+                                    @foreach($taskList as $key => $value)
                                         <tr>
                                             <td>
                                                 @if(request('page') > 1)
-                                                    {{ ++$dataTask['paginate'] }}
+                                                    {{ ++$paginate }}
                                                 @else
                                                     {{ $key + 1 }}
                                                 @endif
@@ -99,7 +99,7 @@
                                                 @if($value->status == \App\Models\Member::STATUS_ACTIVE)
                                                     <a class="btn btn-success text-white dataClass" data-toggle="modal"
                                                        data-target="#exampleModal" data-whatever="@mdo"
-                                                       data-id="{{ $value->id }}" data-project-id="{{ $dataTask['project_id'] }}">Complete</a>
+                                                       data-id="{{ $value->id }}" data-project-id="{{ $projectId}}">Complete</a>
                                                 @else
                                                     <a class="btn btn-secondary text-white" disabled>Complete</a>
                                                 @endif
@@ -111,7 +111,7 @@
                                 <div class="text-center">
                                     <nav aria-label="Page navigation example">
                                         <ul class="pagination justify-content-center">
-                                            {{ $dataTask['listTask']->links() }}
+                                            {{ $taskList->links() }}
                                         </ul>
                                     </nav>
                                 </div>
