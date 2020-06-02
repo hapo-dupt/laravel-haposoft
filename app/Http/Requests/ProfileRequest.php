@@ -31,8 +31,7 @@ class ProfileRequest extends FormRequest
             'phone' => 'required|numeric',
             'address' => 'required|string|max:255',
             'image' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'password' => 'nullable|min:3|max:10',
-            'password_confirmation' => 'confirmed'
+            'password' => 'nullable|min:3|max:10|confirmed'
         ];
     }
 }
