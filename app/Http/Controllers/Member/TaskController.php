@@ -4,12 +4,9 @@ namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
 use App\Models\Member;
-use App\Models\Project;
 use App\Models\Task;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 
 class TaskController extends Controller
 {
@@ -18,8 +15,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $taskByProject = auth()->user()->projects()->paginate(config('app.pagination'));
-        return view('members.tasks.index', ['data' => $taskByProject]);
+        $selectProjects = auth()->user()->projects()->paginate(config('app.pagination'));
+        return view('members.tasks.index', ['selectProjects' => $selectProjects]);
     }
 
     /**

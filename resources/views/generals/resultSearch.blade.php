@@ -34,15 +34,15 @@
                                 <!-- /.card-tools -->
                             </div>
                             <!-- /.card-header -->
-                            @foreach($data as $value)
+                            @foreach($tasks as $task)
                                 <div class="card-body">
                                     <!-- Attachment -->
                                     <div class="attachment-block clearfix">
                                         <div class="attachment">
-                                            <h4>{{ $value->title }}</h4>
+                                            <h4>{{ $task->title }}</h4>
 
                                             <div class="description">
-                                                {{ $value->description }}
+                                                {{ $task->description }}
                                             </div>
                                             <!-- /.attachment-text -->
                                         </div>
@@ -51,7 +51,7 @@
                                     <!-- /.attachment-block -->
 
                                     <!-- Social sharing buttons -->
-                                    <a type="button" class="btn btn-primary text-white" href="{{ route('projects.show', $value->project_id) }}">
+                                    <a type="button" class="btn btn-primary text-white" href="{{ route('projects.show', $task->project_id) }}">
                                         View Project
                                     </a>
                                 </div>
@@ -59,7 +59,7 @@
                             <div class="text-center">
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination justify-content-center">
-                                        {{ $data->appends(request()->all())->links() }}
+                                        {{ $tasks->appends(request()->all())->links() }}
                                     </ul>
                                 </nav>
                             </div>

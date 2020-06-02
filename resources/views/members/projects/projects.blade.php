@@ -39,7 +39,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($projects as $key => $value)
+                                    @foreach($projects as $key => $project)
                                         <tr>
                                             <td>
                                                 @if(request('page') > 1)
@@ -48,12 +48,12 @@
                                                     {{ $key + 1 }}
                                                 @endif
                                             </td>
-                                            <td>{{ $value->title }}</td>
-                                            <td>{{ $value->description }}</td>
-                                            <td>{{ date('H:i d-m-Y', strtotime($value->begin_at)) }}</td>
-                                            <td>{{ date('H:i d-m-Y', strtotime($value->finish_at)) }}</td>
+                                            <td>{{ $project->title }}</td>
+                                            <td>{{ $project->description }}</td>
+                                            <td>{{ date('H:i d-m-Y', strtotime($project->begin_at)) }}</td>
+                                            <td>{{ date('H:i d-m-Y', strtotime($project->finish_at)) }}</td>
                                             <td>
-                                                <a href="{{ route('projects.show', $value->id) }}" class="btn btn-success">view</a>
+                                                <a href="{{ route('projects.show', $project->id) }}" class="btn btn-success">view</a>
                                             </td>
                                         </tr>
                                     @endforeach

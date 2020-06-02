@@ -40,14 +40,14 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($data as $key => $value)
+                                    @foreach($selectProjects as $key => $selectProject)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $value->title }}</td>
-                                            <td>{{ date('H:i d-m-Y', strtotime($value->begin_at)) }}</td>
-                                            <td>{{ date('H:i d-m-Y', strtotime($value->finish_at)) }}</td>
+                                            <td>{{ $selectProject->title }}</td>
+                                            <td>{{ date('H:i d-m-Y', strtotime($selectProject->begin_at)) }}</td>
+                                            <td>{{ date('H:i d-m-Y', strtotime($selectProject->finish_at)) }}</td>
                                             <td>
-                                                <a href="{{ route('tasks.show_task', $value->id) }}" class="btn btn-success">view</a>
+                                                <a href="{{ route('tasks.show_task', $selectProject->id) }}" class="btn btn-success">view</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -56,7 +56,7 @@
                                 <div class="text-center">
                                     <nav aria-label="Page navigation example">
                                         <ul class="pagination justify-content-center">
-                                            {{ $data->links() }}
+                                            {{ $selectProjects->links() }}
                                         </ul>
                                     </nav>
                                 </div>

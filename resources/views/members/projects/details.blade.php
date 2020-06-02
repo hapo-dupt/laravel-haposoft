@@ -43,7 +43,7 @@
                                     <div class="info-box bg-light">
                                         <div class="info-box-content">
                                             <span class="info-box-text text-center text-muted">Start Date</span>
-                                            <span class="info-box-number text-center text-muted mb-0">{{ date('H:i d-m-Y', strtotime($projectDetail->begin_at)) }}</span>
+                                            <span class="info-box-number text-center text-muted mb-0">{{ date('H:i d-m-Y', strtotime($project->begin_at)) }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -51,7 +51,7 @@
                                     <div class="info-box bg-light">
                                         <div class="info-box-content">
                                             <span class="info-box-text text-center text-muted">End Date</span>
-                                            <span class="info-box-number text-center text-muted mb-0">{{ date('H:i d-m-Y', strtotime($projectDetail->finish_at)) }}</span>
+                                            <span class="info-box-number text-center text-muted mb-0">{{ date('H:i d-m-Y', strtotime($project->finish_at)) }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -72,7 +72,7 @@
                                             <strong>Title Project</strong>
                                         </div>
                                         <p>
-                                            {{ $projectDetail->title }}
+                                            {{ $project->title }}
                                         </p>
                                     </div>
 
@@ -81,7 +81,7 @@
                                             <strong>Project Description</strong>
                                         </div>
                                         <p>
-                                            {{ $projectDetail->description }}
+                                            {{ $project->description }}
                                         </p>
                                     </div>
                                 </div>
@@ -95,12 +95,12 @@
                                     <b class="d-block">{{ $customer->full_name }}</b>
                                 </p>
                                 <p class="text-sm">Team members
-                                    @foreach($member as $value)
-                                        @if($value->email != auth()->user()->email)
-                                            <b class="d-block mb-2">- &nbsp {{ $value->name }}</b>
+                                    @foreach($member as $member)
+                                        @if($member->email != auth()->user()->email)
+                                            <b class="d-block mb-2">- &nbsp {{ $member->name }}</b>
                                         @else
                                             <b class="d-block mb-2">- &nbsp You
-                                                ( <text class="text-red">{{ $value->name }}</text> )
+                                                ( <text class="text-red">{{ $member->name }}</text> )
                                             </b>
                                         @endif
                                     @endforeach
@@ -108,7 +108,7 @@
                                 </br>
                                 <p class="text-sm">
                                     <a class="btn btn-primary text-white"
-                                       href="{{ route('tasks.show_task', $projectDetail->id) }}">List of Tasks</a>
+                                       href="{{ route('tasks.show_task', $project->id) }}">List of Tasks</a>
                                     <a class="btn btn-secondary text-white" href="{{ route('projects.index') }}">Back to Projects</a>
                                 </p>
                             </div>

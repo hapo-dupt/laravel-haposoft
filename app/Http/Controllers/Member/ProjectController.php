@@ -17,8 +17,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $project = auth()->user()->projects()->paginate(config('app.pagination'));
-        return view('members.projects.projects', ['projects' => $project]);
+        $projects = auth()->user()->projects()->paginate(config('app.pagination'));
+        return view('members.projects.projects', ['projects' => $projects]);
     }
 
     /**
@@ -28,15 +28,15 @@ class ProjectController extends Controller
      */
     public function show($projectId)
     {
-        $projects = Project::findorFail($projectId);
-        $process = $projects->process_data;
-        $projectContent = [
+        $project = Project::findorFail($projectId);
+        $process = $project->process_data;
+        $projectContents = [
             'process' => $process,
-            'projectDetail' => $projects,
-            'customer' => $projects->customers,
-            'member' => $projects->members
+            'project' => $project,
+            'customer' => $project->customers,
+            'member' => $project->members
         ];
-        return view('members.projects.details', $projectContent);
+        return view('members.projects.details', $projectContents);
     }
 
     /**
@@ -48,13 +48,13 @@ class ProjectController extends Controller
     {
         $projectTitle = Project::findorFail($projectId)->title;
         $tasks = auth()->user()->tasks()->where('project_id', $projectId)->paginate(config('app.pagination'));
-        $dataTask = [
-            'taskList' => $tasks,
+        $dataTasks = [
+            'tasks' => $tasks,
             'orderId' => Member::ID,
             'projectId' => $projectId,
             'paginate' => config('app.pagination'),
             'projectTitle' => $projectTitle
         ];
-        return view('members.tasks.tasks', $dataTask);
+        return view('members.tasks.tasks', $dataTasks);
     }
 }
